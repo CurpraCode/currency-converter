@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import CurrencySet from './CurrencySet'
+import CurrencySet from './CurrencySet';
 
 const BASE_URL = 'https://api.exchangeratesapi.io/latest?access_key=3c0e6f6a1c82444d80d6a4e62213398e'
 

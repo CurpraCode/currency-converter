@@ -1,7 +1,7 @@
 import React from "react";
-import Currency from "../components/Currency";
+import Currency from "./components/Currency";
 import styled from "styled-components";
-import currency from "../assets/currency.png";
+import currency from "./assets/currency.png";
 
 function App() {
   return (
