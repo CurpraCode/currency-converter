@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import axios from "axios";
 import CurrencySet from './CurrencySet'
 
-const BASE_URL = 'https://api.exchangeratesapi.io/latest'
+const BASE_URL = 'https://api.exchangeratesapi.io/latest?access_key=3c0e6f6a1c82444d80d6a4e62213398e'
 
 function Currency() {
   const [currencyOptions, setCurrencyOptions] = useState([])
@@ -21,9 +20,10 @@ function Currency() {
     fromAmount = amount / exchangeRate
   }
 
-  useEffect(()=>{
-      axios.get(BASE_URL)
-      .then((res.data)=>{
+  useEffect(() => {
+    fetch(BASE_URL)
+      .then(res => res.json())
+      .then(data => {
         const firstCurrency = Object.keys(data.rates)[0]
         setCurrencyOptions([data.base, ...Object.keys(data.rates)])
         setFromCurrency(data.base)
@@ -32,13 +32,12 @@ function Currency() {
       })
   }, [])
 
-  useEffect(()=>{
-      if(fromCurrency != null && toCurrency != null){
-          axios.get(`${base_url}?base=${fromCurrency}&symbols=${toCurrency}`)
-          .then((res.data)=>{
-              setExchangeRate(data.rates[toCurrency])
-          })
-      }
+  useEffect(() => {
+    if (fromCurrency != null && toCurrency != null) {
+      fetch(`${BASE_URL}?base=${fromCurrency}&symbols=${toCurrency}`)
+        .then(res => res.json())
+        .then(data => setExchangeRate(data.rates[toCurrency]))
+    }
   }, [fromCurrency, toCurrency])
 
 
